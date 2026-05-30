@@ -1,0 +1,190 @@
+.users-page {
+  min-height: 100vh;
+  background: #0f0e17;
+  padding: 30px 24px 60px;
+}
+
+// ── Header ───────────────────────────────────────────────────
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+
+  h1 {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .count {
+    background: rgba(108, 99, 255, 0.2);
+    border: 1px solid rgba(108, 99, 255, 0.4);
+    color: #a78bfa;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .seed-btn {
+    margin-left: auto;
+    background: rgba(67, 233, 123, 0.12);
+    border: 1px solid rgba(67, 233, 123, 0.35);
+    color: #43e97b;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+
+    &:hover:not(:disabled) {
+      background: rgba(67, 233, 123, 0.22);
+      transform: translateY(-1px);
+    }
+    &:disabled { opacity: 0.6; cursor: not-allowed; }
+  }
+}
+
+// ── Error ───────────────────────────────────────────────────
+.fetch-error {
+  background: rgba(246, 79, 89, 0.12);
+  border: 1px solid rgba(246, 79, 89, 0.4);
+  color: #ff7b7b;
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+}
+
+// ── Grid ─────────────────────────────────────────────────────
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+// ── Card ─────────────────────────────────────────────────────
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(108, 99, 255, 0.25);
+    border-color: rgba(108, 99, 255, 0.4);
+  }
+}
+
+// ── Card top (avatar + badge) ────────────────────────────────
+.card-top {
+  background: linear-gradient(135deg, #1a1040, #302b63);
+  padding: 24px 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .badge {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0d7ff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+}
+
+// ── Card body ────────────────────────────────────────────────
+.card-body {
+  padding: 16px 20px 12px;
+
+  h3 {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+
+  .email {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.8rem;
+    margin: 0 0 10px;
+    word-break: break-all;
+  }
+
+  .meta {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    span { font-size: 0.85rem; }
+  }
+}
+
+// ── Card footer ──────────────────────────────────────────────
+.card-footer {
+  padding: 12px 20px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+  .edit-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6c63ff, #a78bfa);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+
+    &:hover { opacity: 0.85; transform: translateY(-1px); }
+  }
+}
+
+// ── Skeleton loader ──────────────────────────────────────────
+.skeleton {
+  height: 220px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+// ── Empty state ──────────────────────────────────────────────
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255, 255, 255, 0.3);
+
+  span { font-size: 3rem; display: block; margin-bottom: 12px; }
+  p    { font-size: 1rem; margin: 0; }
+}

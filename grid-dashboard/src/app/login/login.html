@@ -1,0 +1,78 @@
+<div class="login-page">
+
+  <!-- Animated background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="login-card" [class.signup-mode]="isSignUp">
+
+    <!-- Logo / Brand -->
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <h1>The Grid</h1>
+      <p>{{ isLogin ? 'Sign in to your account' : 'Create a new account' }}</p>
+    </div>
+
+    <!-- Error -->
+    <div class="alert-error" *ngIf="error">
+      <span>⚠</span> {{ error }}
+    </div>
+
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off" novalidate>
+
+      <!-- Name row (signup only) -->
+      <div class="name-row" *ngIf="isSignUp">
+        <div class="field-wrap">
+          <input type="text" name="firstName" placeholder=" " ngModel required #fn="ngModel"/>
+          <label>First Name</label>
+          <div class="underline"></div>
+          <span class="field-err" *ngIf="fn.invalid && fn.touched">Required</span>
+        </div>
+        <div class="field-wrap">
+          <input type="text" name="lastName" placeholder=" " ngModel required #ln="ngModel"/>
+          <label>Last Name</label>
+          <div class="underline"></div>
+          <span class="field-err" *ngIf="ln.invalid && ln.touched">Required</span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="field-wrap">
+        <input type="email" name="email" placeholder=" " ngModel required #em="ngModel"/>
+        <label>Email Address</label>
+        <div class="underline"></div>
+        <span class="field-err" *ngIf="em.invalid && em.touched">Valid email required</span>
+      </div>
+
+      <!-- Password -->
+      <div class="field-wrap">
+        <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder=" "
+               ngModel required minlength="6" #pw="ngModel"/>
+        <label>Password</label>
+        <div class="underline"></div>
+        <button type="button" class="eye-btn" (click)="showPassword = !showPassword" tabindex="-1">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </button>
+        <span class="field-err" *ngIf="pw.invalid && pw.touched">Min 6 characters</span>
+      </div>
+
+      <!-- Submit -->
+      <button class="submit-btn" type="submit" [disabled]="loading">
+        <span class="spinner" *ngIf="loading"></span>
+        <span *ngIf="!loading">{{ isLogin ? 'Sign In' : 'Create Account' }}</span>
+      </button>
+
+      <!-- Switch mode -->
+      <p class="switch">
+        <ng-container *ngIf="isLogin">
+          No account? <a href="#" (click)="switchTo('signup', $event)">Sign Up</a>
+        </ng-container>
+        <ng-container *ngIf="isSignUp">
+          Have an account? <a href="#" (click)="switchTo('login', $event)">Sign In</a>
+        </ng-container>
+      </p>
+
+    </form>
+  </div>
+</div>

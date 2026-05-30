@@ -1,0 +1,292 @@
+// ── Page ────────────────────────────────────────────────────
+.profile-page {
+  min-height: 100vh;
+  background: #0f0e17;
+  padding: 30px 16px 60px;
+  position: relative;
+}
+
+// ── Toasts ───────────────────────────────────────────────────
+.toast {
+  position: fixed;
+  top: 70px;
+  right: 24px;
+  z-index: 999;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: slideIn 0.3s ease, fadeOut 0.4s ease 2.6s forwards;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+
+  &-success {
+    background: rgba(67, 233, 123, 0.15);
+    border: 1px solid rgba(67, 233, 123, 0.4);
+    color: #43e97b;
+  }
+  &-error {
+    background: rgba(246, 79, 89, 0.15);
+    border: 1px solid rgba(246, 79, 89, 0.4);
+    color: #ff7b7b;
+  }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateX(60px); }
+}
+
+// ── Container ────────────────────────────────────────────────
+.profile-container {
+  max-width: 860px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+
+// ── Banner ───────────────────────────────────────────────────
+.profile-banner {
+  position: relative;
+  padding: 40px 36px 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+
+  .banner-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #6c63ff 0%, #302b63 60%, #0f0c29 100%);
+    opacity: 0.85;
+    z-index: 0;
+  }
+}
+
+.avatar-wrap {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+
+  .avatar-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    display: block;
+  }
+
+  .avatar-edit-btn {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: #6c63ff;
+    border: 2px solid #0f0e17;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+
+    &:hover { background: #a78bfa; transform: scale(1.1); }
+  }
+}
+
+.banner-info {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 4px;
+
+  h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #e0d7ff;
+    font-size: 0.75rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    text-transform: capitalize;
+  }
+}
+
+.hidden-input { display: none; }
+
+// ── Upload progress ──────────────────────────────────────────
+.upload-bar-wrap {
+  background: rgba(255,255,255,0.05);
+  padding: 10px 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+
+  .upload-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #6c63ff, #43e97b);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    flex: 1;
+  }
+}
+
+// ── Form ─────────────────────────────────────────────────────
+.profile-form {
+  padding: 32px 36px 36px;
+}
+
+.section-title {
+  color: #a78bfa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 28px 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+
+  &:first-child { margin-top: 0; }
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+// ── Floating label fields ────────────────────────────────────
+.field-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 160px;
+  margin-bottom: 28px;
+
+  &.wide  { flex: 100%; }
+  &.small { flex: 0 0 120px; }
+
+  input, select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 0.95rem;
+    padding: 10px 0 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+
+    &:focus { border-bottom-color: #6c63ff; }
+
+    &:focus ~ label,
+    &:not(:placeholder-shown) ~ label {
+      top: -14px;
+      font-size: 0.7rem;
+      color: #a78bfa;
+    }
+
+    option { background: #1a1a2e; color: #fff; }
+  }
+
+  select {
+    appearance: none;
+    cursor: pointer;
+
+    // always float label for select
+    & ~ label { top: -14px; font-size: 0.7rem; color: #a78bfa; }
+  }
+
+  label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.9rem;
+    pointer-events: none;
+    transition: all 0.25s ease;
+  }
+
+  .underline {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #6c63ff, #a78bfa);
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  input:focus ~ .underline,
+  select:focus ~ .underline {
+    width: 100%;
+    left: 0;
+  }
+
+  input:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// ── Actions ──────────────────────────────────────────────────
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.save-btn {
+  padding: 13px 36px;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 160px;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(108,99,255,0.4);
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(108,99,255,0.6);
+  }
+  &:active:not(:disabled) { transform: translateY(0); }
+  &:disabled { opacity: 0.65; cursor: not-allowed; }
+}
+
+// ── Spinner ──────────────────────────────────────────────────
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

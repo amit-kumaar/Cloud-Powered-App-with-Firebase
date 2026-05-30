@@ -1,0 +1,13 @@
+<header id="particles">
+  <h2 routerLink="/">⚡ The Grid</h2>
+  <nav class="header-nav">
+    <a routerLink="/users" routerLinkActive="active">👥 All Profiles</a>
+  </nav>
+  <button *ngIf="auth.isLoggedIn()" class="ui secondary button logout" (click)="logout()">
+    Logout
+  </button>
+</header>
+
+<div class="app">
+  <router-outlet></router-outlet>
+</div>

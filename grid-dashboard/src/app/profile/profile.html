@@ -1,0 +1,98 @@
+<div class="profile-page">
+
+  <div class="toast toast-success" *ngIf="success">✅ Profile saved successfully!</div>
+  <div class="toast toast-error" *ngIf="error">⚠ {{ error }}</div>
+
+  <div class="profile-container">
+
+    <!-- Banner -->
+    <div class="profile-banner">
+      <div class="banner-bg"></div>
+      <div class="avatar-wrap">
+        <img [src]="(downloadURL | async) || 'https://ui-avatars.com/api/?name=' + (profile.name || 'User') + '&background=6c63ff&color=fff&size=128'" alt="avatar" class="avatar-img"/>
+        <button class="avatar-edit-btn" (click)="fileInput.click()" title="Change photo">📷</button>
+        <input type="file" #fileInput class="hidden-input" (change)="fileChange($event)" accept=".png,.jpg,.jpeg"/>
+      </div>
+      <div class="banner-info">
+        <h2>{{ profile.name || 'Your Profile' }}</h2>
+        <span class="badge">{{ profile.specialty || 'No specialty set' }}</span>
+      </div>
+    </div>
+
+    <!-- Upload progress -->
+    <div class="upload-bar-wrap" *ngIf="(uploadProgress | async) !== null">
+      <div class="upload-bar" [style.width.%]="uploadProgress | async"></div>
+      <span>Uploading {{ (uploadProgress | async) | number:'1.0-0' }}%</span>
+    </div>
+
+    <!-- Form -->
+    <form class="profile-form" #profileForm="ngForm" (submit)="onSubmit(profileForm)" autocomplete="off">
+
+      <div class="section-title">Personal Info</div>
+      <div class="form-row">
+        <div class="field-wrap">
+          <input type="text" name="name" placeholder=" " [(ngModel)]="profile.name"/>
+          <label>Full Name</label><div class="underline"></div>
+        </div>
+        <div class="field-wrap">
+          <input type="email" name="email" placeholder=" " [(ngModel)]="profile.email" disabled/>
+          <label>Email (read-only)</label><div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-wrap">
+          <input type="text" name="phone" placeholder=" " [(ngModel)]="profile.phone"/>
+          <label>Phone</label><div class="underline"></div>
+        </div>
+        <div class="field-wrap">
+          <input type="text" name="ip" placeholder=" " [(ngModel)]="profile.ip"/>
+          <label>IP Address</label><div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="section-title">Location</div>
+      <div class="form-row">
+        <div class="field-wrap wide">
+          <input type="text" name="address" placeholder=" " [(ngModel)]="profile.address"/>
+          <label>Street Address</label><div class="underline"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field-wrap">
+          <input type="text" name="city" placeholder=" " [(ngModel)]="profile.city"/>
+          <label>City</label><div class="underline"></div>
+        </div>
+        <div class="field-wrap small">
+          <input type="text" name="state" placeholder=" " [(ngModel)]="profile.state"/>
+          <label>State</label><div class="underline"></div>
+        </div>
+        <div class="field-wrap small">
+          <input type="text" name="zip" placeholder=" " [(ngModel)]="profile.zip"/>
+          <label>Zip</label><div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="section-title">Role</div>
+      <div class="form-row">
+        <div class="field-wrap select-wrap">
+          <select name="specialty" [(ngModel)]="profile.specialty">
+            <option value="field agent">Field Agent</option>
+            <option value="covert operations">Covert Operations</option>
+            <option value="intelligence officer">Intelligence Officer</option>
+          </select>
+          <label class="select-label">Specialty</label>
+          <div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="save-btn" [disabled]="loading">
+          <span class="spinner" *ngIf="loading"></span>
+          <span *ngIf="!loading">💾 Save Profile</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

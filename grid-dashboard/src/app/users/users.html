@@ -1,0 +1,49 @@
+<div class="users-page">
+  <div class="page-header">
+    <h1>👥 All Profiles</h1>
+    <span class="count" *ngIf="!loading">{{ users.length }} member{{ users.length !== 1 ? 's' : '' }}</span>
+    <button class="seed-btn" (click)="seedSamples()" [disabled]="seeding">
+      <span *ngIf="seeding">⏳ Adding...</span>
+      <span *ngIf="seeded && !seeding">✅ Done!</span>
+      <span *ngIf="!seeding && !seeded">🌱 Add Sample Profiles</span>
+    </button>
+  </div>
+
+  <!-- Error -->
+  <div class="fetch-error" *ngIf="error">
+    ⚠ {{ error }}
+  </div>
+
+  <!-- Loading skeleton -->
+  <div class="grid" *ngIf="loading">
+    <div class="card skeleton" *ngFor="let i of [1,2,3,4,5,6]"></div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty" *ngIf="!loading && users.length === 0">
+    <span>🔍</span>
+    <p>No profiles found. Click "Add Sample Profiles" to get started.</p>
+  </div>
+
+  <!-- User cards -->
+  <div class="grid" *ngIf="!loading && users.length > 0">
+    <div class="card" *ngFor="let u of users">
+      <div class="card-top">
+        <img [src]="avatarUrl(u)" [alt]="u.name" class="avatar"/>
+        <div class="badge">{{ u.specialty || 'No specialty' }}</div>
+      </div>
+      <div class="card-body">
+        <h3>{{ u.name || '—' }}</h3>
+        <p class="email">✉ {{ u.email }}</p>
+        <div class="meta" *ngIf="u.phone"><span>📞</span> {{ u.phone }}</div>
+        <div class="meta" *ngIf="u.city || u.state">
+          <span>📍</span> {{ u.city }}{{ u.city && u.state ? ', ' : '' }}{{ u.state }}
+        </div>
+        <div class="meta" *ngIf="u.address"><span>🏠</span> {{ u.address }}</div>
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="['/profile', u.uid]" class="edit-btn">✏️ Edit Profile</a>
+      </div>
+    </div>
+  </div>
+</div>

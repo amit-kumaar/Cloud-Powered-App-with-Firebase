@@ -1,0 +1,233 @@
+// ── Page ────────────────────────────────────────────────────
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  position: relative;
+  overflow: hidden;
+}
+
+// ── Animated orbs ───────────────────────────────────────────
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+.orb-1 { width: 420px; height: 420px; background: #6c63ff; top: -100px; left: -120px; animation-duration: 14s; }
+.orb-2 { width: 300px; height: 300px; background: #f64f59; bottom: -80px; right: -80px; animation-duration: 10s; animation-delay: 2s; }
+.orb-3 { width: 250px; height: 250px; background: #43e97b; top: 40%; left: 55%; animation-duration: 16s; animation-delay: 4s; }
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(40px, 30px) scale(1.1); }
+}
+
+// ── Card ────────────────────────────────────────────────────
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 420px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 24px;
+  padding: 44px 48px 40px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  transition: width 0.4s ease;
+
+  &.signup-mode { width: 500px; }
+}
+
+// ── Brand ───────────────────────────────────────────────────
+.brand {
+  text-align: center;
+  margin-bottom: 32px;
+
+  .brand-icon {
+    font-size: 2.4rem;
+    display: inline-block;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 8px 0 6px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.88rem;
+    margin: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+// ── Error alert ─────────────────────────────────────────────
+.alert-error {
+  background: rgba(246, 79, 89, 0.15);
+  border: 1px solid rgba(246, 79, 89, 0.5);
+  color: #ff7b7b;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.84rem;
+  margin-bottom: 22px;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-7px); }
+  75%      { transform: translateX(7px); }
+}
+
+// ── Name row ────────────────────────────────────────────────
+.name-row {
+  display: flex;
+  gap: 16px;
+  .field-wrap { flex: 1; }
+}
+
+// ── Floating label fields ────────────────────────────────────
+.field-wrap {
+  position: relative;
+  margin-bottom: 30px;
+
+  input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.18);
+    color: #fff;
+    font-size: 0.95rem;
+    padding: 10px 28px 8px 0;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+
+    &:focus { border-bottom-color: #6c63ff; }
+
+    &:focus ~ label,
+    &:not(:placeholder-shown) ~ label {
+      top: -14px;
+      font-size: 0.7rem;
+      color: #a78bfa;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: rgba(255,255,255,0.38);
+    font-size: 0.92rem;
+    pointer-events: none;
+    transition: all 0.25s ease;
+  }
+
+  .underline {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #6c63ff, #a78bfa);
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  input:focus ~ .underline {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.field-err {
+  display: block;
+  color: #ff7b7b;
+  font-size: 0.7rem;
+  margin-top: 3px;
+}
+
+// ── Eye button ───────────────────────────────────────────────
+.eye-btn {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  &:hover { opacity: 1; }
+}
+
+// ── Submit ───────────────────────────────────────────────────
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  box-shadow: 0 8px 24px rgba(108, 99, 255, 0.45);
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(108, 99, 255, 0.6);
+  }
+  &:active:not(:disabled) { transform: translateY(0); }
+  &:disabled { opacity: 0.65; cursor: not-allowed; }
+}
+
+// ── Spinner ──────────────────────────────────────────────────
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Switch link ──────────────────────────────────────────────
+.switch {
+  text-align: center;
+  margin-top: 24px;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+
+  a {
+    color: #a78bfa;
+    font-weight: 600;
+    transition: color 0.2s;
+    &:hover { color: #6c63ff; }
+  }
+}
